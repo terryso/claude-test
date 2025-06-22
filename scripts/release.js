@@ -63,11 +63,11 @@ function updateVersion(releaseType) {
   const currentVersion = getCurrentVersion();
   console.log(chalk.gray(`Current version: ${currentVersion}`));
   
-  const newVersion = execute(`npm version ${releaseType} --no-git-tag-version`, { silent: true }).trim();
-  const cleanVersion = newVersion.replace('v', '');
+  const versionOutput = execute(`npm version ${releaseType} --no-git-tag-version`, { silent: true });
+  const newVersion = versionOutput.trim().replace(/^v/, '');
   
-  console.log(chalk.green(`✅ Version bumped to: ${cleanVersion}`));
-  return cleanVersion;
+  console.log(chalk.green(`✅ Version bumped to: ${newVersion}`));
+  return newVersion;
 }
 
 function createGitTag(version) {
@@ -82,7 +82,7 @@ function createGitTag(version) {
   // Create and push tag
   execute(`git tag ${tagName}`);
   execute('git push origin master');
-  execute(`git push origin ${tagName}`);
+  execute('git push origin --tags');
   
   console.log(chalk.green(`✅ Created and pushed tag: ${tagName}`));
   return tagName;
