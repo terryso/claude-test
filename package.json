@@ -1,11 +1,12 @@
 {
   "name": "claude-test",
   "version": "1.0.0",
-  "description": "YAML-based Playwright testing framework for Claude Code",
+  "description": "YAML-based Playwright MCP testing framework for Claude Code",
   "keywords": [
     "claude",
     "claude-code", 
     "playwright",
+    "mcp",
     "yaml",
     "testing",
     "automation",

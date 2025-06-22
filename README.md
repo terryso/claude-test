@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/claude-test.svg)](https://badge.fury.io/js/claude-test)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-YAML-based Playwright testing framework for Claude Code. Easily initialize, manage, and update your testing framework in any project.
+YAML-based Playwright MCP testing framework for Claude Code. Easily initialize, manage, and update your testing framework in any project.
 
 ## Installation
 
