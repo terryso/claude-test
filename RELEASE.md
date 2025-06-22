@@ -15,7 +15,7 @@ Following [Semantic Versioning (SemVer)](https://semver.org/):
 Before creating a release:
 
 1. **Clean working directory**: No uncommitted changes
-2. **Main branch**: Must be on the main branch
+2. **Master branch**: Must be on the master branch
 3. **All tests passing**: Full test suite must pass
 4. **Documentation updated**: README.md and command docs current
 5. **CHANGELOG updated**: Document all changes since last release
@@ -111,7 +111,7 @@ npm run prepublish-check
 npm version patch
 
 # Push with tags
-git push origin main --tags
+git push origin master --tags
 ```
 
 ### 3. Publish to NPM
@@ -272,9 +272,9 @@ For critical bugs requiring immediate release:
    npm run prepublish-check
    ```
 
-4. **Merge to main**:
+4. **Merge to master**:
    ```bash
-   git checkout main
+   git checkout master
    git merge hotfix/critical-fix
    ```
 

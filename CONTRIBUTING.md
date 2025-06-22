@@ -135,10 +135,10 @@ npm run release:major
 
 ### PR Process
 
-1. **Fork and branch**: Create a feature branch from `main`
+1. **Fork and branch**: Create a feature branch from `master`
 2. **Make changes**: Implement your changes with tests
 3. **Test thoroughly**: Run the full test suite
-4. **Submit PR**: Create a pull request to `main` branch
+4. **Submit PR**: Create a pull request to `master` branch
 5. **Code review**: Address feedback from maintainers
 6. **Merge**: PR will be merged after approval and CI passes
 

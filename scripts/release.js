@@ -42,13 +42,13 @@ function validateGitStatus() {
   }
   
   const branch = execute('git rev-parse --abbrev-ref HEAD', { silent: true }).trim();
-  if (branch !== 'main') {
-    console.error(chalk.red(`❌ Not on main branch. Current branch: ${branch}`));
-    console.log(chalk.yellow('Please switch to main branch before releasing.'));
+  if (branch !== 'master') {
+    console.error(chalk.red(`❌ Not on master branch. Current branch: ${branch}`));
+    console.log(chalk.yellow('Please switch to master branch before releasing.'));
     process.exit(1);
   }
   
-  console.log(chalk.green('✅ Git status is clean and on main branch'));
+  console.log(chalk.green('✅ Git status is clean and on master branch'));
 }
 
 function runTests() {
@@ -81,7 +81,7 @@ function createGitTag(version) {
   
   // Create and push tag
   execute(`git tag ${tagName}`);
-  execute('git push origin main');
+  execute('git push origin master');
   execute(`git push origin ${tagName}`);
   
   console.log(chalk.green(`✅ Created and pushed tag: ${tagName}`));
