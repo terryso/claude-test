@@ -1,0 +1,88 @@
+{
+  "name": "claude-test",
+  "version": "1.0.0",
+  "description": "YAML-based Playwright testing framework for Claude Code",
+  "keywords": [
+    "claude",
+    "claude-code", 
+    "playwright",
+    "yaml",
+    "testing",
+    "automation",
+    "cli"
+  ],
+  "main": "lib/index.js",
+  "bin": {
+    "claude-test": "bin/claude-test.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint lib/ bin/ test/",
+    "lint:fix": "eslint lib/ bin/ test/ --fix",
+    "prepack": "npm run lint && npm test",
+    "prepublishOnly": "node scripts/pre-publish-check.js",
+    "prepublish-check": "node scripts/pre-publish-check.js",
+    "postversion": "git push && git push --tags",
+    "release:patch": "node scripts/release.js patch",
+    "release:minor": "node scripts/release.js minor",
+    "release:major": "node scripts/release.js major",
+    "release": "node scripts/release.js",
+    "ci": "npm ci && npm run lint && npm run test:coverage"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "fs-extra": "^11.2.0",
+    "semver": "^7.5.4",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthropics/claude-test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anthropics/claude-test/issues"
+  },
+  "homepage": "https://github.com/anthropics/claude-test#readme",
+  "author": "Anthropic <noreply@anthropic.com>",
+  "license": "MIT",
+  "files": [
+    "bin/",
+    "lib/",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/test/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "lib/**/*.js",
+      "bin/**/*.js",
+      "!lib/templates/**/*"
+    ],
+    "coverageReporters": ["text", "html", "lcov"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 15,
+        "functions": 35,
+        "lines": 25,
+        "statements": 25
+      }
+    }
+  }
+}
