@@ -25,7 +25,6 @@
     "prepack": "npm run lint && npm test",
     "prepublishOnly": "node scripts/pre-publish-check.js",
     "prepublish-check": "node scripts/pre-publish-check.js",
-    "postversion": "git push origin master && git push origin --tags",
     "release:patch": "node scripts/release.js patch",
     "release:minor": "node scripts/release.js minor",
     "release:major": "node scripts/release.js major",

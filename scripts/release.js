@@ -63,8 +63,11 @@ function updateVersion(releaseType) {
   const currentVersion = getCurrentVersion();
   console.log(chalk.gray(`Current version: ${currentVersion}`));
   
-  const versionOutput = execute(`npm version ${releaseType} --no-git-tag-version`, { silent: true });
-  const newVersion = versionOutput.trim().replace(/^v/, '');
+  // Use npm version to bump the version
+  execute(`npm version ${releaseType} --no-git-tag-version`, { silent: true });
+  
+  // Get the new version from package.json
+  const newVersion = getCurrentVersion();
   
   console.log(chalk.green(`✅ Version bumped to: ${newVersion}`));
   return newVersion;
