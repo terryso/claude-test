@@ -73,7 +73,7 @@ Once the tag is pushed, GitHub Actions automatically:
 
 1. **Runs CI pipeline**:
    - Tests on Node.js 16.x, 18.x, 20.x
-   - Tests on Ubuntu, Windows, macOS
+   - Tests on Ubuntu, macOS
    - Runs security audit
    - Validates CLI functionality
 

@@ -55,7 +55,7 @@ Thank you for your interest in contributing to claude-test! This document provid
 - **Unit Tests**: All new functions must have unit tests
 - **Integration Tests**: CLI commands must have integration tests
 - **Coverage**: Maintain >= 80% test coverage
-- **Cross-Platform**: Tests must pass on Windows, macOS, and Linux
+- **Cross-Platform**: Tests must pass on macOS and Linux
 
 ### Pre-commit Checks
 
@@ -147,7 +147,7 @@ npm run release:major
 ### Continuous Integration
 
 **On every push and PR**:
-- **Multi-platform testing**: Ubuntu, Windows, macOS
+- **Multi-platform testing**: Ubuntu, macOS
 - **Multi-version testing**: Node.js 16.x, 18.x, 20.x
 - **Code quality checks**: Linting, testing, coverage
 - **Security audit**: npm audit for vulnerabilities
@@ -175,7 +175,7 @@ npm run release:major
 Please include:
 - **Node.js version**: `node --version`
 - **npm version**: `npm --version`
-- **Operating system**: Windows/macOS/Linux
+- **Operating system**: macOS/Linux
 - **claude-test version**: `claude-test --version`
 - **Error message**: Full error output
 - **Steps to reproduce**: Clear reproduction steps
