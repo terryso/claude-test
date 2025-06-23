@@ -81,7 +81,7 @@ program.on('command:*', () => {
     chalk.red('❌ Invalid command: %s'),
     program.args.join(' ')
   );
-  console.log(chalk.gray('Run "claude-test --help" for available commands.'));
+  console.error(chalk.gray('Run "claude-test --help" for available commands.'));
   process.exit(1);
 });
 
@@ -90,7 +90,5 @@ program.parse();
 
 // Show help if no command provided
 if (!process.argv.slice(2).length) {
-  console.log(chalk.blue('🎯 Claude Test Framework CLI'));
-  console.log(chalk.gray('YAML-based Playwright testing for Claude Code\n'));
   program.outputHelp();
 }
