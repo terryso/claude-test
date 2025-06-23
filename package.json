@@ -30,14 +30,15 @@
     "perf:monitor": "node scripts/performance-monitor.js",
     "lint": "eslint lib/ bin/ test/",
     "lint:fix": "eslint lib/ bin/ test/ --fix",
-    "prepack": "npm run lint && npm test",
+    "sync-templates": "node scripts/sync-templates.js",
+    "prepack": "npm run sync-templates && npm run lint && npm test",
     "prepublishOnly": "node scripts/pre-publish-check.js",
     "prepublish-check": "node scripts/pre-publish-check.js",
     "release:patch": "node scripts/release.js patch",
     "release:minor": "node scripts/release.js minor",
     "release:major": "node scripts/release.js major",
     "release": "node scripts/release.js",
-    "ci": "npm ci && npm run lint && npm run test:coverage"
+    "ci": "npm ci && npm run sync-templates && npm run lint && npm run test:coverage"
   },
   "dependencies": {
     "commander": "^11.1.0",

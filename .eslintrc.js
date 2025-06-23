@@ -53,6 +53,17 @@ module.exports = {
       rules: {
         'no-console': 'off' // Allow console in scripts
       }
+    },
+    {
+      files: ['lib/templates/**/*.js'],
+      rules: {
+        'no-unused-vars': 'off', // Template files may have unused vars
+        'no-prototype-builtins': 'off', // Template files may use prototype methods
+        'no-case-declarations': 'off', // Template files may have case declarations
+        'indent': 'off', // Template files may have different indentation
+        'quotes': 'off', // Template files may use different quote styles
+        'prefer-const': 'off' // Template files may use let/var differently
+      }
     }
   ]
 };

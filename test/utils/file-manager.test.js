@@ -60,19 +60,18 @@ describe('FileManager', () => {
       await fs.ensureDir(tempRootDir);
       const originalCwd = process.cwd();
       
-      // Mock __dirname to point to the isolated directory to prevent finding .claude from CLI
-      // const originalDirname = __dirname; // Currently unused
+      // Mock the _getTemplateDir method to simulate missing template
       const FileManagerModule = require('../../lib/utils/file-manager');
-      const originalFindProjectRoot = FileManagerModule._findProjectRoot;
-      FileManagerModule._findProjectRoot = () => {
-        throw new Error('Could not locate .claude directory. Please run from a valid claude-test project.');
+      const originalGetTemplateDir = FileManagerModule._getTemplateDir;
+      FileManagerModule._getTemplateDir = () => {
+        throw new Error('Could not locate template directory. Please ensure claude-test is properly installed.');
       };
       
       try {
-        await expect(FileManagerModule.copyFrameworkFiles(targetDir)).rejects.toThrow('Could not locate .claude directory');
+        await expect(FileManagerModule.copyFrameworkFiles(targetDir)).rejects.toThrow('Could not locate template directory');
       } finally {
         process.chdir(originalCwd);
-        FileManagerModule._findProjectRoot = originalFindProjectRoot;
+        FileManagerModule._getTemplateDir = originalGetTemplateDir;
         await fs.remove(tempRootDir);
       }
     });
@@ -243,13 +242,31 @@ describe('FileManager', () => {
       const sourceDir = path.join(targetDir, 'source');
       const destDir = path.join(targetDir, 'dest');
       await fs.ensureDir(sourceDir);
-      await fs.writeFile(path.join(sourceDir, 'test.txt'), 'test content');
+      
+      // Create allowed files and directories that should be copied
+      await fs.ensureDir(path.join(sourceDir, 'commands'));
+      await fs.ensureDir(path.join(sourceDir, 'scripts'));
+      await fs.writeFile(path.join(sourceDir, 'commands', 'test.md'), '# Test Command');
+      await fs.writeFile(path.join(sourceDir, 'scripts', 'test.js'), '// Test Script');
+      // Note: settings.local.json is intentionally NOT created as it should not be copied
+      
+      // Create files that should NOT be copied
+      await fs.ensureDir(path.join(sourceDir, 'ide'));
+      await fs.writeFile(path.join(sourceDir, 'ide', 'test.txt'), 'should not be copied');
       
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
       
       await FileManager._copyWithProgress(sourceDir, destDir, { verbose: true });
       
-      expect(await fs.pathExists(path.join(destDir, 'test.txt'))).toBe(true);
+      // Check that allowed files were copied
+      expect(await fs.pathExists(path.join(destDir, 'commands', 'test.md'))).toBe(true);
+      expect(await fs.pathExists(path.join(destDir, 'scripts', 'test.js'))).toBe(true);
+      // settings.local.json should NOT be copied (it's local configuration)
+      expect(await fs.pathExists(path.join(destDir, 'settings.local.json'))).toBe(false);
+      
+      // Check that disallowed files were NOT copied
+      expect(await fs.pathExists(path.join(destDir, 'ide'))).toBe(false);
+      
       // In test environment, verbose output is suppressed
       if (process.env.NODE_ENV !== 'test') {
         expect(consoleSpy).toHaveBeenCalled();

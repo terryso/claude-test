@@ -193,10 +193,17 @@ function checkDependencies() {
   }
 }
 
+function syncTemplates() {
+  console.log(chalk.blue('🔄 Syncing templates...'));
+  execute('npm run sync-templates');
+  console.log(chalk.green('✅ Templates synced'));
+}
+
 function main() {
   console.log(chalk.blue('🚀 Running pre-publish validation...\n'));
   
   const checks = [
+    { name: 'Template Sync', fn: syncTemplates },
     { name: 'File Check', fn: checkFiles },
     { name: 'Package.json Validation', fn: checkPackageJson },
     { name: 'Binary Executable Check', fn: checkBinExecutable },
