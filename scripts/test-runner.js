@@ -88,7 +88,7 @@ class TestRunner {
   async runIntegrationTests() {
     this.log('Running integration tests...', 'info');
     
-    const result = await this.runCommand('npm run test -- --testPathPattern="test/integration"');
+    const result = await this.runCommand('npm run test:integration');
     this.results.integration = result;
     
     if (result.success) {
