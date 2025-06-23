@@ -32,8 +32,14 @@ jobs:
     - name: Run linting
       run: npm run lint
       
-    - name: Run tests with coverage
-      run: npm run test:coverage
+    - name: Run comprehensive test suite
+      run: npm run test:all
+      env:
+        RUN_COVERAGE: true
+        RUN_COMPATIBILITY_TESTS: true
+        RUN_ERROR_TESTS: true
+        RUN_PERFORMANCE_TESTS: ${{ matrix.node-version == '18.x' && matrix.os == 'ubuntu-latest' }}
+        VERBOSE: false
       
     - name: Upload coverage to Codecov
       if: matrix.node-version == '18.x' && matrix.os == 'ubuntu-latest'

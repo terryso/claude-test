@@ -1,0 +1,24 @@
+# E-commerce Test Suite
+# Complete test suite for e-commerce functionality
+
+name: E-commerce Smoke Tests
+description: Critical functionality tests for e-commerce website
+tags: [smoke, e-commerce, critical]
+
+test-cases:
+  - test-cases/login.yml
+  - test-cases/product-search.yml
+  - test-cases/add-to-cart.yml
+  - test-cases/checkout.yml
+
+# Test execution configuration
+execution:
+  parallel: false          # Run tests sequentially for this suite
+  continue-on-failure: true # Continue running tests even if one fails
+  timeout: 300             # 5 minutes timeout per test
+  
+# Reporting configuration
+reporting:
+  generate-screenshots: true
+  include-performance: true
+  create-summary: true

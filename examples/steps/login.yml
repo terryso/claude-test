@@ -1,0 +1,12 @@
+# Login Step Library
+# Reusable login flow that can be included in other tests
+
+description: Standard user login flow
+steps:
+  - "Navigate to {{BASE_URL}}/login"
+  - "Wait for login form to load"
+  - "Fill username field with {{TEST_USERNAME}}"
+  - "Fill password field with {{TEST_PASSWORD}}"
+  - "Click login button"
+  - "Wait for dashboard to load"
+  - "Verify user is logged in successfully"

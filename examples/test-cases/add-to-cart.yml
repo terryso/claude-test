@@ -1,0 +1,20 @@
+# Add to Cart Test
+# This test demonstrates e-commerce cart functionality
+
+tags: [smoke, cart, e-commerce]
+description: Add products to shopping cart and verify cart contents
+
+steps:
+  - include: login
+  - include: navigate-to-product
+  - "Verify product page is displayed"
+  - "Check product price is visible"
+  - "Select quantity: 2"
+  - "Click 'Add to Cart' button"
+  - "Wait for cart notification"
+  - "Verify success message displays"
+  - "Click cart icon in header"
+  - "Verify cart contains the selected product"
+  - "Verify quantity shows as 2"
+  - "Verify cart total is calculated correctly"
+  - "Take screenshot of cart contents"

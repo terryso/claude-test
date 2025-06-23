@@ -1,0 +1,10 @@
+# Navigate to Product Step Library
+# Reusable step to navigate to a specific product
+
+description: Navigate to a specific product for testing
+steps:
+  - "Navigate to {{BASE_URL}}/products"
+  - "Wait for product catalog to load"
+  - "Click on first available product"
+  - "Wait for product detail page to load"
+  - "Verify product information is displayed"

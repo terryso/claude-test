@@ -1,0 +1,18 @@
+# Product Search Test
+# This test demonstrates using step libraries and search functionality
+
+tags: [smoke, search, e-commerce]
+description: Search for products in the e-commerce catalog
+
+steps:
+  - include: login
+  - "Click search field in header"
+  - "Type 'laptop' in search field"
+  - "Press Enter key"
+  - "Wait for search results to load"
+  - "Verify search results page displays"
+  - "Verify search results contain 'laptop' in title"
+  - "Verify at least 5 products are displayed"
+  - "Click first product in results"
+  - "Verify product detail page loads"
+  - "Take screenshot of product page"

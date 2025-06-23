@@ -1,0 +1,15 @@
+# Basic Login Test
+# This test demonstrates a simple login flow with environment variables
+
+tags: [smoke, login, authentication]
+description: Standard user login functionality test
+
+steps:
+  - "Navigate to {{BASE_URL}}/login"
+  - "Wait for login form to load"
+  - "Fill username field with {{TEST_USERNAME}}"
+  - "Fill password field with {{TEST_PASSWORD}}"
+  - "Click login button"
+  - "Wait for dashboard to load"
+  - "Verify user is logged in successfully"
+  - "Take screenshot for verification"

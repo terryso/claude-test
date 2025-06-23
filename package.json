@@ -17,9 +17,17 @@
     "claude-test": "bin/claude-test.js"
   },
   "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest --testPathIgnorePatterns=test/integration test/performance test/compatibility test/error-handling test/cli-e2e.test.js",
+    "test:coverage": "jest --coverage --testPathIgnorePatterns=test/integration test/performance test/compatibility test/error-handling test/cli-e2e.test.js",
     "test:watch": "jest --watch",
+    "test:unit": "jest --testPathPattern=\"test/(commands|utils)\"",
+    "test:integration": "jest --testPathPattern=\"test/integration\"",
+    "test:e2e": "RUN_E2E_TESTS=true jest --testPathPattern=\"test/cli-e2e.test.js\"",
+    "test:performance": "jest --testPathPattern=\"test/performance\"",
+    "test:compatibility": "jest --testPathPattern=\"test/compatibility\"",
+    "test:error-handling": "jest --testPathPattern=\"test/error-handling\"",
+    "test:all": "node scripts/test-runner.js",
+    "perf:monitor": "node scripts/performance-monitor.js",
     "lint": "eslint lib/ bin/ test/",
     "lint:fix": "eslint lib/ bin/ test/ --fix",
     "prepack": "npm run lint && npm test",
@@ -47,13 +55,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anthropics/claude-test.git"
+    "url": "https://github.com/terryso/claude-test.git"
   },
   "bugs": {
-    "url": "https://github.com/anthropics/claude-test/issues"
+    "url": "https://github.com/terryso/claude-test/issues"
   },
-  "homepage": "https://github.com/anthropics/claude-test#readme",
-  "author": "Anthropic <noreply@anthropic.com>",
+  "homepage": "https://github.com/terryso/claude-test#readme",
+  "author": "terryso <oxtiger@gmail.com>",
   "license": "MIT",
   "files": [
     "bin/",
@@ -68,12 +76,15 @@
   "jest": {
     "testEnvironment": "node",
     "testMatch": [
-      "**/test/**/*.test.js"
+      "**/test/**/*.test.js",
+      "**/.claude/scripts/**/*.test.js"
     ],
     "collectCoverageFrom": [
       "lib/**/*.js",
       "bin/**/*.js",
-      "!lib/templates/**/*"
+      ".claude/scripts/**/*.js",
+      "!lib/templates/**/*",
+      "!**/*.test.js"
     ],
     "coverageReporters": [
       "text",
@@ -82,10 +93,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 15,
-        "functions": 35,
-        "lines": 25,
-        "statements": 25
+        "branches": 45,
+        "functions": 75,
+        "lines": 60,
+        "statements": 60
       }
     }
   }
