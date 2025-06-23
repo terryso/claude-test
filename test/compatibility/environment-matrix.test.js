@@ -88,7 +88,7 @@ describe('Environment Matrix Compatibility', () => {
         execSync('npm config get registry', { encoding: 'utf8' });
         execSync('npm config get cache', { encoding: 'utf8' });
       } catch (error) {
-        fail(`npm configuration check failed: ${error.message}`);
+        throw new Error(`npm configuration check failed: ${error.message}`);
       }
     });
     

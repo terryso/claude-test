@@ -66,7 +66,7 @@ describe('Performance Benchmarks', () => {
       
       // Launch concurrent init processes
       for (const dir of concurrentDirs) {
-        const promise = new Promise((resolve, reject) => {
+        const promise = new Promise((resolve, _reject) => {
           try {
             execSync(`node ${cliPath} init`, {
               cwd: dir,
@@ -81,7 +81,7 @@ describe('Performance Benchmarks', () => {
         promises.push(promise);
       }
       
-      const results = await Promise.all(promises);
+      await Promise.all(promises);
       const endTime = performance.now();
       const totalDuration = endTime - startTime;
       

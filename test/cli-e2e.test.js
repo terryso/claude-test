@@ -160,7 +160,7 @@ describe('CLI End-to-End Tests', () => {
         });
         
         // If we get here, the command didn't fail as expected
-        fail('Command should have failed');
+        throw new Error('Command should have failed');
       } catch (error) {
         expect(error.status).toBe(1);
         expect(error.stdout || error.stderr).toContain('Invalid command') ||

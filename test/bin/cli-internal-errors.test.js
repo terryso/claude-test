@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path'); // Currently unused
 
 describe('CLI Internal Error Handling', () => {
   let originalConsoleError;

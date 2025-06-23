@@ -141,7 +141,7 @@ describe('Cross-Platform Compatibility', () => {
         } else {
           execSync('sleep 2', { timeout: 1000 });
         }
-        fail('Command should have timed out');
+        throw new Error('Command should have timed out');
       } catch (error) {
         const endTime = Date.now();
         expect(endTime - startTime).toBeLessThan(2000);

@@ -61,7 +61,7 @@ describe('FileManager', () => {
       const originalCwd = process.cwd();
       
       // Mock __dirname to point to the isolated directory to prevent finding .claude from CLI
-      const originalDirname = __dirname;
+      // const originalDirname = __dirname; // Currently unused
       const FileManagerModule = require('../../lib/utils/file-manager');
       const originalFindProjectRoot = FileManagerModule._findProjectRoot;
       FileManagerModule._findProjectRoot = () => {

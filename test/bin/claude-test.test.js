@@ -60,9 +60,6 @@ describe('CLI Entry Point', () => {
       
       // If we get here, the module loaded successfully
       expect(true).toBe(true);
-    } catch (error) {
-      // If there's an error, it should be caught
-      throw error;
     } finally {
       // Restore original values
       process.argv = originalArgv;
@@ -75,7 +72,7 @@ describe('CLI Entry Point', () => {
     const processSpy = jest.spyOn(process, 'exit').mockImplementation();
     
     try {
-      const result = execSync(`node "${cliPath}" init --invalid-option`, { 
+      execSync(`node "${cliPath}" init --invalid-option`, { 
         encoding: 'utf8', 
         stdio: 'pipe' 
       });
@@ -90,7 +87,7 @@ describe('CLI Entry Point', () => {
 
   test('should handle update command errors', () => {
     try {
-      const result = execSync(`node "${cliPath}" update --invalid-option`, { 
+      execSync(`node "${cliPath}" update --invalid-option`, { 
         encoding: 'utf8', 
         stdio: 'pipe' 
       });
@@ -102,7 +99,7 @@ describe('CLI Entry Point', () => {
 
   test('should handle check command errors', () => {
     try {
-      const result = execSync(`node "${cliPath}" check --invalid-option`, { 
+      execSync(`node "${cliPath}" check --invalid-option`, { 
         encoding: 'utf8', 
         stdio: 'pipe' 
       });

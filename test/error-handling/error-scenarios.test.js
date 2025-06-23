@@ -34,7 +34,7 @@ describe('Error Handling Scenarios', () => {
           stdio: 'pipe',
           timeout: 5000
         });
-        fail('Should have thrown an error');
+        throw new Error('Should have thrown an error');
       } catch (error) {
         expect(error.status).toBe(1);
         const output = error.stdout.toString() + error.stderr.toString();
@@ -48,7 +48,7 @@ describe('Error Handling Scenarios', () => {
           stdio: 'pipe',
           timeout: 5000
         });
-        fail('Should have thrown an error');
+        throw new Error('Should have thrown an error');
       } catch (error) {
         expect(error.status).toBe(1);
         // Should provide helpful error message
@@ -61,7 +61,7 @@ describe('Error Handling Scenarios', () => {
           stdio: 'pipe',
           timeout: 5000
         });
-        fail('Should have thrown an error');
+        throw new Error('Should have thrown an error');
       } catch (error) {
         expect(error.status).toBe(1);
       }
@@ -104,7 +104,7 @@ describe('Error Handling Scenarios', () => {
           stdio: 'pipe',
           timeout: 10000
         });
-        fail('Should have failed due to permissions');
+        throw new Error('Should have failed due to permissions');
       } catch (error) {
         expect(error.status).toBeGreaterThan(0);
         const output = error.stdout.toString() + error.stderr.toString();
@@ -125,7 +125,7 @@ describe('Error Handling Scenarios', () => {
       
       try {
         await FileManager.copyFrameworkFiles(tempDir);
-        fail('Should have thrown disk space error');
+        throw new Error('Should have thrown disk space error');
       } catch (error) {
         expect(error.message).toContain('ENOSPC');
       }
@@ -182,7 +182,7 @@ describe('Error Handling Scenarios', () => {
       
       try {
         await VersionManager.checkRemoteVersion();
-        fail('Should have thrown timeout error');
+        throw new Error('Should have thrown timeout error');
       } catch (error) {
         expect(error.message).toContain('ETIMEDOUT');
       }
@@ -200,7 +200,7 @@ describe('Error Handling Scenarios', () => {
       
       try {
         await VersionManager.checkRemoteVersion();
-        fail('Should have thrown DNS error');
+        throw new Error('Should have thrown DNS error');
       } catch (error) {
         expect(error.message).toContain('ENOTFOUND');
       }
@@ -291,7 +291,7 @@ describe('Error Handling Scenarios', () => {
         done();
       });
       
-      child.on('error', (error) => {
+      child.on('error', (_error) => {
         if (!terminated) {
           done();
         }
@@ -356,14 +356,14 @@ describe('Error Handling Scenarios', () => {
           stdio: 'pipe',
           timeout: 5000
         });
-        fail('Should have handled long argument gracefully');
+        throw new Error('Should have handled long argument gracefully');
       } catch (error) {
         expect(error.status).toBeGreaterThan(0);
       }
     });
     
     test('should handle special characters in arguments', () => {
-      const specialChars = ['<', '>', '|', '&', ';', '"', "'", '`'];
+      const specialChars = ['<', '>', '|', '&', ';', '"', '\'', '`'];
       
       for (const char of specialChars) {
         try {
