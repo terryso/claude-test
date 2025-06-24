@@ -1,9 +1,18 @@
 # claude-test
 
 [![npm version](https://badge.fury.io/js/claude-test.svg)](https://badge.fury.io/js/claude-test)
+[![NPM Downloads](https://img.shields.io/npm/dm/claude-test.svg)](https://www.npmjs.com/package/claude-test)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
+[![Test Coverage](https://img.shields.io/badge/coverage-84.95%25-brightgreen.svg)](https://github.com/terryso/claude-test)
+[![GitHub Issues](https://img.shields.io/github/issues/terryso/claude-test.svg)](https://github.com/terryso/claude-test/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-YAML-based Playwright MCP testing framework for Claude Code. Easily initialize, manage, and update your testing framework in any project.
+🎯 **English** | [中文](README.zh.md)
+
+YAML-based Playwright MCP testing framework CLI for Claude Code. This is the **official CLI package** that allows you to easily initialize, manage, and update a sophisticated testing framework in any project.
+
+> **🚀 What's New**: Revolutionary session persistence, multi-environment support, and smart HTML reporting with 84.95% test coverage.
 
 ## Installation
 
@@ -359,12 +368,43 @@ The framework includes comprehensive testing and validation:
 
 We welcome contributions! Please read our contributing guidelines before submitting pull requests.
 
+## CLI Development and Architecture
+
+This project is the **official CLI tool** for the claude-test framework. It contains:
+
+### Core Components
+- **CLI Entry Point**: `bin/claude-test.js` - Commander.js-based CLI with three main commands
+- **Commands**: `lib/commands/` - Implementation for init, update, and check commands
+- **Utilities**: `lib/utils/` - Core business logic (file management, version control)
+- **Templates**: `lib/templates/` - Framework files that get copied to user projects
+
+### Development Scripts
+- `npm test` - Run Jest test suite with 84.95% code coverage
+- `npm run lint` - ESLint validation
+- `npm run test:coverage` - Coverage analysis including .claude/scripts
+- `npm run sync-templates` - Sync framework templates
+- `npm run ci` - Complete CI pipeline
+
+### Testing
+Comprehensive test coverage including:
+- Unit tests for all core modules
+- Integration tests for CLI commands
+- Error handling and edge case validation
+- CLI command execution testing
+
+## Demo and Usage Examples
+
+For **practical usage examples** and **integration demonstrations**, visit the companion project:
+
+📖 **[claude-test-demo](https://github.com/terryso/claude-code-playwright-mcp-test)** - Complete usage examples, test cases, and integration guides
+
 ## Support
 
 For issues and questions:
 
-- **GitHub Issues**: [Report a bug](https://github.com/anthropics/claude-test/issues)
-- **Documentation**: [Full Documentation](https://github.com/anthropics/claude-test#readme)
+- **GitHub Issues**: [Report a bug](https://github.com/terryso/claude-test/issues)
+- **Full Documentation**: [Full Documentation](https://github.com/terryso/claude-test#readme)
+- **Demo Project**: [claude-code-playwright-mcp-test](https://github.com/terryso/claude-code-playwright-mcp-test)
 - **Claude Code Docs**: [https://docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code)
 
 ## License
