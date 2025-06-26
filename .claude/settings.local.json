@@ -14,7 +14,11 @@
       "mcp__playwright-headless__browser_press_key",
       "mcp__playwright-headless__browser_console_messages",
       "mcp__playwright-headless__browser_close",
-      "mcp__playwright-headless__browser_select_option"
+      "mcp__playwright-headless__browser_select_option",
+      "Bash(grep:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run test:integration:*)",
+      "Bash(npm run test:*)"
     ],
     "deny": []
   }

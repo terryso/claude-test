@@ -115,9 +115,14 @@ describe('CLI Integration Tests', () => {
       // First initialization
       await runCLI(['init'], { cwd: tempDir });
       
-      // Create a test file
+      // Create a test file (user's custom file)
       const testFile = path.join(tempDir, '.claude', 'test-file.txt');
       await fs.writeFile(testFile, 'test content');
+      
+      // Modify a template file to test overwrite
+      const commandFile = path.join(tempDir, '.claude', 'commands', 'run-yaml-test.md');
+      const originalContent = await fs.readFile(commandFile, 'utf8');
+      await fs.writeFile(commandFile, 'modified content');
       
       // Second initialization with force
       const result = await runCLI(['init', '--force'], { cwd: tempDir });
@@ -125,8 +130,13 @@ describe('CLI Integration Tests', () => {
       expect(result.code).toBe(0);
       expect(result.stdout).toContain('initialized successfully');
       
-      // Test file should be removed
-      expect(await fs.pathExists(testFile)).toBe(false);
+      // User's custom file should be preserved
+      expect(await fs.pathExists(testFile)).toBe(true);
+      expect(await fs.readFile(testFile, 'utf8')).toBe('test content');
+      
+      // Template file should be restored to original content
+      const restoredContent = await fs.readFile(commandFile, 'utf8');
+      expect(restoredContent).toBe(originalContent);
     });
   });
   
