@@ -6,6 +6,10 @@ Execute YAML-based Playwright test cases with step library references and parame
 
 - `file` (optional): Test case file path, if not provided executes all test cases in test-cases directory
 - `env` (optional): Environment name (dev/test/prod), defaults to dev
+- `test-root` (optional): Test root directory path, defaults to project root
+  - Relative paths are resolved from project root (e.g., `examples`)
+  - Absolute paths are used as-is (e.g., `/absolute/path/to/tests`)
+  - Contains test-cases/, steps/, test-suites/ directories and .env files
 - `tags` (optional): Tag filtering, supports single or multiple tags. **Executes ALL test cases that match the tag criteria**
   - Single tag: `smoke` (executes all test cases containing the 'smoke' tag)
   - Multiple tags AND: `smoke,login` (must contain both smoke and login tags)
@@ -60,7 +64,7 @@ Execution workflow:
 
 ### Automated Processing Command:
 ```bash
-node .claude/scripts/yaml-test-processor.js --env={env} --tags={tags} --file={file}
+node .claude/scripts/yaml-test-processor.js --env={env} --tags={tags} --file={file} --test-root={test-root}
 ```
 
 ### Manual Processing (Legacy - use only if processor fails):
@@ -315,4 +319,4 @@ Use the session-optimized versions with `session-optimized` tag:
 
 Please load environment configuration based on parameters, parse YAML structure, apply tag filtering, expand includes and environment variables, execute tests using Playwright MCP with session optimization, and generate reports if configured.
 
-ARGUMENTS: {file} {env} {tags}
+ARGUMENTS: {file} {env} {tags} {test-root}

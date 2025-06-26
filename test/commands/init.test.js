@@ -85,15 +85,15 @@ describe('init command', () => {
     // First initialization
     await init({ verbose: true });
     
-    // Create a test file
+    // Create a test file in .claude directory (user file)
     const testFile = path.join(tempDir, '.claude', 'test-file.txt');
     await fs.writeFile(testFile, 'test content');
     
     // Second initialization with force
     await init({ force: true, verbose: true });
     
-    // Test file should be removed
-    expect(await fs.pathExists(testFile)).toBe(false);
+    // Test file should be preserved (user files are not deleted)
+    expect(await fs.pathExists(testFile)).toBe(true);
     
     // Framework should still be properly initialized
     const versionFile = path.join(tempDir, '.claude', '.framework-version');

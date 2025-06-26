@@ -6,6 +6,10 @@ Execute YAML-based test suites containing multiple organized test cases with sui
 
 - `suite` (optional): Test suite file path, if not provided executes all test suites in test-suites directory
 - `env` (optional): Environment name (dev/test/prod), defaults to the suite's configured environment or dev
+- `test-root` (optional): Test root directory path, defaults to project root
+  - Relative paths are resolved from project root (e.g., `examples`)
+  - Absolute paths are used as-is (e.g., `/absolute/path/to/tests`)
+  - Contains test-suites/, test-cases/, steps/ directories and .env files
 - `tags` (optional): Tag filtering for both suite-level and test-level tags. **Executes ALL test suites and test cases that match the tag criteria**
   - Single tag: `smoke` (executes all suites/tests containing the 'smoke' tag)
   - Multiple tags AND: `smoke,integration` (must contain both smoke and integration tags)
@@ -71,7 +75,7 @@ Execution workflow:
 
 ### Automated Processing Command:
 ```bash
-node .claude/scripts/yaml-test-processor.js --suites --env={env} --tags={tags} --suite={suite}
+node .claude/scripts/yaml-test-processor.js --suites --env={env} --tags={tags} --suite={suite} --test-root={test-root}
 ```
 
 ### Test Suite Execution Process:
@@ -406,4 +410,4 @@ const suiteResults = [
 
 Please load suite configuration, apply filtering, execute pre-actions, process all test cases with session optimization, execute post-actions, and generate consolidated suite reports.
 
-ARGUMENTS: {suite} {env} {tags}
+ARGUMENTS: {suite} {env} {tags} {test-root}

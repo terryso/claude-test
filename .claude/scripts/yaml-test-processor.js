@@ -18,9 +18,19 @@ try {
 class YAMLTestProcessor {
     constructor(options = {}) {
         this.projectRoot = options.projectRoot || process.cwd();
-        this.testCasesDir = path.join(this.projectRoot, 'test-cases');
-        this.testSuitesDir = path.join(this.projectRoot, 'test-suites');
-        this.stepsDir = path.join(this.projectRoot, 'steps');
+        
+        // 处理 testRoot 参数：如果是相对路径，基于项目根目录解析
+        if (options.testRoot) {
+            this.testRoot = path.isAbsolute(options.testRoot) 
+                ? options.testRoot 
+                : path.join(this.projectRoot, options.testRoot);
+        } else {
+            this.testRoot = this.projectRoot;
+        }
+        
+        this.testCasesDir = path.join(this.testRoot, 'test-cases');
+        this.testSuitesDir = path.join(this.testRoot, 'test-suites');
+        this.stepsDir = path.join(this.testRoot, 'steps');
         this.environment = options.environment || 'dev';
         this.tagFilter = options.tagFilter;
         
@@ -35,7 +45,7 @@ class YAMLTestProcessor {
      * 加载环境配置
      */
     loadEnvironmentConfig() {
-        const envFile = path.join(this.projectRoot, `.env.${this.environment}`);
+        const envFile = path.join(this.testRoot, `.env.${this.environment}`);
         if (fs.existsSync(envFile)) {
             const envContent = fs.readFileSync(envFile, 'utf8');
             const envVars = {};
@@ -455,7 +465,7 @@ class YAMLTestProcessor {
                         // 解析测试用例路径
                         const fullPath = path.isAbsolute(testCasePath) 
                             ? testCasePath 
-                            : path.join(this.projectRoot, testCasePath);
+                            : path.join(this.testRoot, testCasePath);
 
                         if (!fs.existsSync(fullPath)) {
                             throw new Error(`Test case file not found: ${testCasePath}`);
@@ -572,6 +582,8 @@ function main() {
         } else if (arg.startsWith('--suite=')) {
             specificSuite = arg.split('=')[1];
             mode = 'suites';
+        } else if (arg.startsWith('--test-root=')) {
+            options.testRoot = arg.split('=')[1];
         } else if (arg === '--suites') {
             mode = 'suites';
         } else if (arg === '--help' || arg === '-h') {
@@ -585,6 +597,8 @@ Options:
   --tags=<tag-filter>     Tag filter (e.g., smoke, smoke|login, smoke,critical)
   --file=<test-file>      Specific test file to process
   --suite=<suite-file>    Specific test suite to process
+  --test-root=<path>      Test root directory (default: project root)
+                         Relative paths are resolved from project root
   --suites                Process all test suites instead of test cases
   --help, -h              Show this help message
 
@@ -598,6 +612,10 @@ Examples:
   node yaml-test-processor.js --suites --env=test
   node yaml-test-processor.js --suite=e-commerce.yml --env=prod
   node yaml-test-processor.js --suites --tags=smoke
+  
+  # Use custom test root directory
+  node yaml-test-processor.js --test-root=examples --tags=smoke
+  node yaml-test-processor.js --test-root=/absolute/path/to/tests --env=dev
             `);
             process.exit(0);
         }
