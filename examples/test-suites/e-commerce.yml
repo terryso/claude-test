@@ -1,24 +1,18 @@
 # E-commerce Test Suite
-# Complete test suite for e-commerce functionality
+# Complete e-commerce workflow testing from login to checkout
+name: "E-commerce Test Suite"
+description: "Complete e-commerce workflow testing covering user registration, product browsing, cart operations, and checkout process"
+tags:
+  - e-commerce
+  - integration
+  - critical
 
-name: E-commerce Smoke Tests
-description: Critical functionality tests for e-commerce website
-tags: [smoke, e-commerce, critical]
-
+# Test cases to execute in order
 test-cases:
-  - test-cases/login.yml
-  - test-cases/product-search.yml
-  - test-cases/add-to-cart.yml
-  - test-cases/checkout.yml
+  - "test-cases/order.yml"
+  - "test-cases/product-details.yml"
+  - "test-cases/sort-optimized.yml"
 
-# Test execution configuration
-execution:
-  parallel: false          # Run tests sequentially for this suite
-  continue-on-failure: true # Continue running tests even if one fails
-  timeout: 300             # 5 minutes timeout per test
-  
-# Reporting configuration
-reporting:
-  generate-screenshots: true
-  include-performance: true
-  create-summary: true
+# Post-suite actions
+post-actions:
+  - "Close browser"

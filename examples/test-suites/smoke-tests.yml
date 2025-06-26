@@ -1,22 +1,17 @@
 # Smoke Test Suite
-# Quick validation tests to verify basic functionality
+# Quick validation of core functionality
+name: "Smoke Test Suite"
+description: "Quick smoke tests to validate core application functionality"
+tags:
+  - smoke
+  - quick
+  - sanity
 
-name: Smoke Tests
-description: Quick tests to validate basic application functionality
-tags: [smoke, quick, validation]
-
+# Test cases to execute
 test-cases:
-  - test-cases/login.yml
-  - test-cases/product-search.yml
+  - "test-cases/sort.yml"
+  - "test-cases/product-details.yml"
 
-# Test execution configuration
-execution:
-  parallel: false          # Run tests sequentially
-  continue-on-failure: false # Stop on first failure for smoke tests
-  timeout: 120             # 2 minutes timeout per test
-  
-# Reporting configuration
-reporting:
-  generate-screenshots: false # Skip screenshots for quick smoke tests
-  include-performance: false
-  create-summary: true
+# Post-suite actions
+post-actions:
+  - "Close browser"
