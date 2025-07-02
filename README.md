@@ -407,6 +407,10 @@ For issues and questions:
 - **Demo Project**: [claude-code-playwright-mcp-test](https://github.com/terryso/claude-code-playwright-mcp-test)
 - **Claude Code Docs**: [https://docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code)
 
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=terryso/claude-test&type=Date)](https://www.star-history.com/#terryso/claude-test&Date)
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
